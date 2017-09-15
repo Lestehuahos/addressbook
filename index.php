@@ -77,54 +77,51 @@ if(isset($_SESSION['msg'])) {
         
 		<div clas="row"><p class="text-center"></p></div>
 		<div clas="row">
-	<?php 
-	echo '<table class="table"><tbody><tr><p align="center"><a href="/add.php"><button>Add New Post</button></a></p></tr></tbody></table>';
+			<?php 
+			echo '<table class="table"><tbody><tr><p align="center"><a href="/add.php"><button>Add New Post</button></a></p></tr></tbody></table>';
 
-	$stmt = $pdo->prepare('SELECT * from entries ORDER BY creation_date DESC LIMIT :start, :quantity');
-	$stmt->bindParam(':start', $start_from, PDO::PARAM_INT);
-	$stmt->bindParam(':quantity', $records_on_page, PDO::PARAM_INT);
-		
-	$stmt->execute(); 
-	
+			$stmt = $pdo->prepare('SELECT * from entries ORDER BY creation_date DESC LIMIT :start, :quantity');
+			$stmt->bindParam(':start', $start_from, PDO::PARAM_INT);
+			$stmt->bindParam(':quantity', $records_on_page, PDO::PARAM_INT);
+				
+			$stmt->execute(); 
+			
 
-	foreach ($stmt as $row)
-	{
-		echo '<table class="table"><tbody>';
-		echo '<tr><th>'.$row['title'].'</th></tr>';
-		echo '<tr><td>Posted By '.$row['author'].' · '.date('d M Y H:i', $row['creation_date']).'</td></tr>';
-        echo "<tr><td>".$row['description']."</td></tr>";
-		echo '<tr><td><a href="?edit_post_id='.$row['id'].'">Редактировать</a> <a href="?post_id='.$row['id'].'">Удалить</a></td></tr>';
-		echo '</tbody></table>';
-	}
-	echo "<table class=\"table\"><tbody><tr><th></th></tr></tbody></table>";
-	?>
+			foreach ($stmt as $row)
+			{
+				echo '<table class="table"><tbody>';
+				echo '<tr><th>'.$row['title'].'</th></tr>';
+				echo '<tr><td>Posted By '.$row['author'].' · '.date('d M Y H:i', $row['creation_date']).'</td></tr>';
+				echo "<tr><td>".$row['description']."</td></tr>";
+				echo '<tr><td><a href="?edit_post_id='.$row['id'].'">Редактировать</a> <a href="?post_id='.$row['id'].'">Удалить</a></td></tr>';
+				echo '</tbody></table>';
+			}
+			echo "<table class=\"table\"><tbody><tr><th></th></tr></tbody></table>";
+			?>
 		</div>  
+		<div class="row"><?php 
+			echo "<div class=\"row\"><p class=\"text-center\">";
+				for ($page = 1; $page <= $pages_quantity; $page++)
+				{
+					if ($page == $current_page)
+				{
+				echo '<strong>'.$page.'</strong> &nbsp;';
+				}
+				else
+				{
+				echo '<a href="?page='.$page.'">'.$page.'</a> &nbsp;';
+				}
+			}
+			echo "</p></div>";
+		?>
+		</div>
 		
-      </div>
-	 
-		<div id="push"></div>
-	</div>  
+    </div> 
 	
 	<div id="footer">
-      <div class="container">
-		<?php 
-		echo "<div class=\"row\"><p class=\"text-center\">";
-			for ($page = 1; $page <= $pages_quantity; $page++)
-			{
-				if ($page == $current_page)
-			{
-			echo '<strong>'.$page.'</strong> &nbsp;';
-			}
-			else
-			{
-			echo '<a href="?page='.$page.'">'.$page.'</a> &nbsp;';
-			}
-		}
-		echo "</p></div>";
-		?>
         <p align="center">Copyright 2017</p>
-      </div>
     </div>
+ </div> 
 	
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.min.js"></script>

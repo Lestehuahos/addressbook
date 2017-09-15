@@ -4,10 +4,12 @@ html, body {
 
 body {
 	background-color: #f5f5f5;
+	background-image: url(../images/bg.jpg);
 }
 
 .container {
-    background-color: #f5f5f5;
+    background-color: #f0f0f0;
+	padding-bottom: 60px;
 }
 
  th {
@@ -20,19 +22,22 @@ body {
 
 /* Wrapper for page content to push down footer */
 #wrap {
+	position: relative;
     min-height: 100%;
-    height: auto !important;
-    height: 100%;
+    width: 1200px;
+	margin: 0 auto;
+	background-color: #f0f0f0;
     /* Negative indent footer by it's height */
-    margin: 0 auto -60px;
+    /*margin: 0 auto -60px;*/
 }
 
 /* Set the fixed height of the footer here */
-#push,
 #footer {
+	position: absolute;
+	padding-top: 20px;
+	left: 0;
+	bottom: 0;
     height: 60px;
+	width: 100%;
+	background-color: #d8d8d8;
 }   
-   
-#footer {
-    background-color: #f5f5f5;
-}
